@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public Employee delete(Long id){
-        return null;
+        return employeeStorage.remove(id);
     }
 
     public List<Employee> getAll(){
