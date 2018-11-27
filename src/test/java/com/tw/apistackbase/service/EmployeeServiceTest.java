@@ -120,8 +120,10 @@ public class EmployeeServiceTest {
         EmployeeService service = new EmployeeServiceImpl();
         Employee firstEmployee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, FEMALE, SALARY);
+        Employee thirdEmployee = new Employee(0L, DUMMY_NAME, AGE_FIFTY, MALE, SALARY);
         service.add(firstEmployee);
         service.add(secondEmployee);
+        service.add(thirdEmployee);
 
         List<Employee> returnEmployees = service.findByPageAndPageSize(page, pageSize);
 
