@@ -42,6 +42,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public List<Company> findByPageAndPageSize(Integer page, Integer pageSize){
-        return null;
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, companiesStorage.size());
+        if (endIndex < startIndex) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(companiesStorage.values()).subList(startIndex, endIndex);
     }
 }
