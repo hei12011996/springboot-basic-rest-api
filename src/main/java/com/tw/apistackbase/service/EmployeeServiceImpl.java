@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
-    private static Map<Long, Employee> employeeStorage = new HashMap<Long, Employee>();
+    private Map<Long, Employee> employeeStorage = new HashMap<Long, Employee>();
 
     public Employee add(Employee employee){
         Long latestId = Long.valueOf(employeeStorage.size() + 1);
