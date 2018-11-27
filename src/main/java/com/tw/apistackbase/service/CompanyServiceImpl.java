@@ -12,13 +12,18 @@ import java.util.Map;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    private static Map<Long, Company> companiesStorage = new HashMap<Long, Company>();
+    private Map<Long, Company> companiesStorage = new HashMap<Long, Company>();
 
     @Autowired
     private EmployeeService employeeService;
 
     public Company add(Company company){
-        return null;
+        Long latestId = Long.valueOf(companiesStorage.size() + 1);
+        companiesStorage.put(latestId, company);
+        for (Employee employee : company.getEmployees()){
+            employeeService.upsert(employee.getId(), employee);
+        }
+        return company;
     }
 
     public Company findById(Long id){
