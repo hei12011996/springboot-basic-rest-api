@@ -18,6 +18,11 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    @GetMapping(path = "/{id}", produces = {"application/json"})
+    public ResponseEntity<Company> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(companyService.findById(id));
+    }
+
     @GetMapping(produces = {"application/json"})
     public ResponseEntity<List<Company>> query(@RequestParam(value = "page", required = false) Integer page,
                                                @RequestParam(value = "pageSize", required = false) Integer pageSize){
