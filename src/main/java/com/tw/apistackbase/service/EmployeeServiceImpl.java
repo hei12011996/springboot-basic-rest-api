@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public Employee upsert(Long id, Employee employee){
-        return null;
+        return employeeStorage.put(id, employee);
     }
 
     public List<Employee> getAll(){
