@@ -46,7 +46,11 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public List<Employee> findByPageAndPageSize(Integer page, Integer pageSize){
-        int startindex = (page - 1) * pageSize;
-        return new ArrayList<>(employeeStorage.values()).subList(startindex, startindex + pageSize);
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, employeeStorage.size());
+        if (endIndex < startIndex) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(employeeStorage.values()).subList(startIndex, endIndex);
     }
 }
