@@ -1,6 +1,7 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Company;
+import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class CompanyController {
     @GetMapping(path = "/{id}", produces = {"application/json"})
     public ResponseEntity<Company> findById(@PathVariable Long id) {
         return ResponseEntity.ok(companyService.findById(id));
+    }
+
+    @GetMapping(path = "/{id}/employees", produces = {"application/json"})
+    public ResponseEntity<List<Employee>> queryEmployeesUnderCompany(@PathVariable Long id){
+        return ResponseEntity.ok(companyService.getEmployeeUnderCompany(id));
     }
 
     @GetMapping(produces = {"application/json"})
