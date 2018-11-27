@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class EmployeeServiceTest {
 
@@ -62,6 +63,19 @@ public class EmployeeServiceTest {
         assertEquals(AGE_FIFTY, returnEmployee.getAge());
         assertEquals(FEMALE, returnEmployee.getGender());
         assertEquals(SALARY_UPDATED, returnEmployee.getSalary());
+    }
+
+    @Test
+    public void should_return_null_while_update_employee_given_non_existing_id(){
+        Long nonExistingId = -1L;
+        EmployeeService service = new EmployeeServiceImpl();
+        Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
+        Employee updatedEmployee = new Employee(0L, DUMMY_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
+        service.add(employee);
+
+        Employee returnEmployee = service.update(nonExistingId, updatedEmployee);
+
+        assertNull(returnEmployee);
     }
 
     @Test
