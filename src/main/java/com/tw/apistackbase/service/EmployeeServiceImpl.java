@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public List<Employee> getAll(){
-        return null;
+        return new ArrayList<>(employeeStorage.values());
     }
 
     public List<Employee> findByGender(String gender){
