@@ -31,4 +31,9 @@ public class CompanyController {
     public ResponseEntity<Company> addCompany(@RequestBody Company company) {
         return ResponseEntity.ok(companyService.add(company));
     }
+
+    @PutMapping(path = "/{id}", produces = {"application/json"})
+    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody Company company) {
+        return ResponseEntity.ok(companyService.update(id, company));
+    }
 }
