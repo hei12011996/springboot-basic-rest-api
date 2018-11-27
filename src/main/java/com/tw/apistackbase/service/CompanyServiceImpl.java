@@ -2,10 +2,20 @@ package com.tw.apistackbase.service;
 
 import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Service
 public class CompanyServiceImpl implements CompanyService {
+    private static Map<Long, Company> companiesStorage = new HashMap<Long, Company>();
+
+    @Autowired
+    private EmployeeService employeeService;
 
     public Company add(Company company){
         return null;
@@ -20,7 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public Company delete(Long id){
-        return null;
+        return companiesStorage.remove(id);
     }
 
     public List<Employee> getEmployeeUnderCompany(Long id){
