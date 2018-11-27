@@ -38,4 +38,9 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> findByGender(@RequestParam String gender) {
         return ResponseEntity.ok(employeeService.findByGender(gender));
     }
+
+    @PostMapping(produces = {"application/json"})
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.add(employee));
+    }
 }
