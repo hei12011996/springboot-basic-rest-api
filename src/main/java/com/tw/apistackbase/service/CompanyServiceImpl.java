@@ -22,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public Company findById(Long id){
-        return null;
+        return companiesStorage.get(id);
     }
 
     public Company update(Long id, Company company){
