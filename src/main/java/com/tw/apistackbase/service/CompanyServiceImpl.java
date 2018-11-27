@@ -38,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public List<Company> getAll(){
-        return null;
+        return new ArrayList<>(companiesStorage.values());
     }
 
     public List<Company> findByPageAndPageSize(Integer page, Integer pageSize){
