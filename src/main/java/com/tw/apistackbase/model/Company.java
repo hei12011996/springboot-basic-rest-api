@@ -27,7 +27,7 @@ public class Company {
         return employeesNumber;
     }
 
-    public List<Employee> employees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
