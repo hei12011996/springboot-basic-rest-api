@@ -1,6 +1,7 @@
 package com.tw.apistackbase.service;
 
 import com.tw.apistackbase.model.Employee;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService{
     private static Map<Long, Employee> employeeStorage = new HashMap<Long, Employee>();
 
