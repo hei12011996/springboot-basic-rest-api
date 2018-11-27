@@ -2,7 +2,6 @@ package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.EmployeeService;
-import com.tw.apistackbase.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    private EmployeeService employeeService = new EmployeeServiceImpl();
+    private EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
-    }
-
-    @GetMapping(produces = {"application/json"})
-    public ResponseEntity<List<Employee>> getAll() {
-        return ResponseEntity.ok(employeeService.getAll());
     }
 
     @GetMapping(path = "/{id}", produces = {"application/json"})
@@ -30,13 +24,15 @@ public class EmployeeController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public ResponseEntity<List<Employee>> queryByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
-        return ResponseEntity.ok(employeeService.findByPageAndPageSize(page, pageSize));
-    }
-
-    @GetMapping(produces = {"application/json"})
-    public ResponseEntity<List<Employee>> findByGender(@RequestParam String gender) {
-        return ResponseEntity.ok(employeeService.findByGender(gender));
+    public ResponseEntity<List<Employee>> query(@RequestParam(value = "page", required = false) Integer page,
+                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                @RequestParam(value = "gender", required = false) String gender){
+        if (page != null && pageSize != null){
+            return ResponseEntity.ok(employeeService.findByPageAndPageSize(page, pageSize));
+        } else if (gender != null) {
+            return ResponseEntity.ok(employeeService.findByGender(gender));
+        }
+        return ResponseEntity.ok(employeeService.getAll());
     }
 
     @PostMapping(produces = {"application/json"})
