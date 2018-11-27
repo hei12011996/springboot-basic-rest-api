@@ -31,7 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public Company update(Long id, Company company){
-        if (!companiesStorage.containsKey(id)) {
+        if (companiesStorage.containsKey(id)) {
             companiesStorage.put(id, company);
             for (Employee employee : company.getEmployees()) {
                 employeeService.upsert(employee.getId(), employee);
