@@ -33,4 +33,9 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> queryByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return ResponseEntity.ok(employeeService.findByPageAndPageSize(page, pageSize));
     }
+
+    @GetMapping(produces = {"application/json"})
+    public ResponseEntity<List<Employee>> findByGender(@RequestParam String gender) {
+        return ResponseEntity.ok(employeeService.findByGender(gender));
+    }
 }
