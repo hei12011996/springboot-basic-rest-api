@@ -10,6 +10,7 @@ public interface EmployeeService {
     Employee findById(Long id);
     Employee update(Long id, Employee employee);
     Employee delete(Long id);
+    Employee upsert(Long id, Employee employee);
 
     List<Employee> getAll();
     List<Employee> findByGender(String gender);

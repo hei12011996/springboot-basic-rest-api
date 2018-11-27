@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class EmployeeServiceTest {
 
@@ -21,7 +22,7 @@ public class EmployeeServiceTest {
     public static final Integer SALARY_UPDATED = 50000;
 
     @Test
-    public void should_return_employee_while_add_employee(){
+    public void should_return_employee_when_add_employee(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
 
@@ -35,7 +36,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_employee_while_find_employee_by_id(){
+    public void should_return_employee_when_find_employee_by_id(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         service.add(employee);
@@ -50,7 +51,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_employee_while_update_employee(){
+    public void should_return_employee_when_update_employee(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee updatedEmployee = new Employee(0L, DUMMY_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
@@ -66,7 +67,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_null_while_update_employee_given_non_existing_id(){
+    public void should_return_null_when_update_employee_given_non_existing_id(){
         Long nonExistingId = -1L;
         EmployeeService service = new EmployeeServiceImpl();
         Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
@@ -79,7 +80,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_employee_while_delete_employee(){
+    public void should_return_employee_when_delete_employee(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         service.add(employee);
@@ -90,7 +91,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_all_employees_while_get_all_employees(){
+    public void should_return_all_employees_when_get_all_employees(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee firstEmployee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
@@ -101,7 +102,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_employees_while_find_employee_by_gender(){
+    public void should_return_employees_when_find_employee_by_gender(){
         EmployeeService service = new EmployeeServiceImpl();
         Employee firstEmployee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, FEMALE, SALARY);
@@ -114,7 +115,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void should_return_employees_while_find_employee_by_page_and_page_size(){
+    public void should_return_employees_when_find_employee_by_page_and_page_size(){
         Integer page = 2;
         Integer pageSize = 1;
         EmployeeService service = new EmployeeServiceImpl();
@@ -128,5 +129,27 @@ public class EmployeeServiceTest {
         List<Employee> returnEmployees = service.findByPageAndPageSize(page, pageSize);
 
         assertEquals(Arrays.asList(secondEmployee), returnEmployees);
+    }
+    
+    @Test
+    public void should_insert_and_return_employee_when_upsert_employee_that_no_exist_before(){
+        Long id = 5L;
+        EmployeeService service = new EmployeeServiceImpl();
+        Employee employee = new Employee(id, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
+
+        service.upsert(id, employee);
+
+        assertSame(employee, service.findById(id));
+    }
+    @Test
+    public void should_update_and_return_employee_when_upsert_employee_that_exist(){
+        EmployeeService service = new EmployeeServiceImpl();
+        Employee employee = new Employee(0L, DUMMY_NAME, AGE_TWENTY_TWO, MALE, SALARY);
+        Employee updatedEmployee = new Employee(1L, DUMMY_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
+        service.add(employee);
+
+        service.upsert(1L, updatedEmployee);
+
+        assertSame(updatedEmployee, service.findById(1L));
     }
 }

@@ -37,6 +37,10 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeStorage.remove(id);
     }
 
+    public Employee upsert(Long id, Employee employee){
+        return null;
+    }
+
     public List<Employee> getAll(){
         return new ArrayList<>(employeeStorage.values());
     }
