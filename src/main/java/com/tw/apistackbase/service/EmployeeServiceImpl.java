@@ -22,7 +22,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public Employee update(Long id, Employee employee){
-        return null;
+        if (!employeeStorage.containsKey(id)) {
+            return null;
+        }
+        employee.setId(id);
+        employeeStorage.put(id, employee);
+        return employee;
     }
 
     public Employee delete(Long id){
