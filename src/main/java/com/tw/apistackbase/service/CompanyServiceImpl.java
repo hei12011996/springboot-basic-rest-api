@@ -15,7 +15,7 @@ public class CompanyServiceImpl implements CompanyService {
     private Map<Long, Company> companiesStorage = new HashMap<Long, Company>();
 
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeService employeeService = new EmployeeServiceImpl();
 
     public Company add(Company company){
         Long latestId = Long.valueOf(companiesStorage.size() + 1);
@@ -31,6 +31,13 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public Company update(Long id, Company company){
+        if (!companiesStorage.containsKey(id)) {
+            companiesStorage.put(id, company);
+            for (Employee employee : company.getEmployees()) {
+                employeeService.upsert(employee.getId(), employee);
+            }
+            return company;
+        }
         return null;
     }
 
