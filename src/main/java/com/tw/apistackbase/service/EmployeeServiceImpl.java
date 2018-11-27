@@ -18,7 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     public Employee findById(Long id){
-        return null;
+        return employeeStorage.get(id);
     }
 
     public Employee update(Long id, Employee employee){
