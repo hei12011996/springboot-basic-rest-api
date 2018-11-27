@@ -6,6 +6,7 @@ import com.tw.apistackbase.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +25,10 @@ public class EmployeeController {
     @GetMapping(produces = {"application/json"})
     public ResponseEntity<List<Employee>> getAll() {
         return ResponseEntity.ok(employeeService.getAll());
+    }
+
+    @GetMapping(path = "/{id}", produces = {"application/json"})
+    public ResponseEntity<Employee> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.findById(id));
     }
 }
