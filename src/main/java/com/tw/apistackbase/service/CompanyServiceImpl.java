@@ -34,7 +34,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public List<Employee> getEmployeeUnderCompany(Long id){
-        return null;
+        return companiesStorage.get(id).getEmployees();
     }
 
     public List<Company> getAll(){
