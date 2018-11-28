@@ -13,9 +13,12 @@ import java.util.Map;
 @Service
 public class CompanyServiceImpl implements CompanyService {
     private Map<Long, Company> companiesStorage = new HashMap<Long, Company>();
+    private EmployeeService employeeService;
 
     @Autowired
-    private EmployeeService employeeService = new EmployeeServiceImpl();
+    public CompanyServiceImpl(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
 
     public Company add(Company company){
         Long latestId = Long.valueOf(companiesStorage.size() + 1);

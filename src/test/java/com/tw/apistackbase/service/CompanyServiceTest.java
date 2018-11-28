@@ -24,7 +24,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_company_while_add_company(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Employee employee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         List<Employee> employees = new ArrayList<Employee>();
         employees.add(employee);
@@ -39,7 +39,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_company_while_find_company_by_id(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         List<Employee> employees = new ArrayList<Employee>();
         Company firstCompany = new Company(DUMMY_COMPANY_NAME, 1, employees);
         Company secondCompany = new Company(DUMMY_COMPANY_NAME, 1, employees);
@@ -52,7 +52,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_company_while_update_company(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Employee firstEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
         Company company = new Company(DUMMY_COMPANY_NAME, 1, Arrays.asList(firstEmployee));
@@ -68,7 +68,7 @@ public class CompanyServiceTest {
     @Test
     public void should_return_null_while_update_company_given_non_existing_id(){
         Long nonExistingId = 2L;
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Company company = new Company(DUMMY_COMPANY_NAME, 1, new ArrayList<>());
         Company updatedCompany = new Company(DUMMY_COMPANY_NAME, 1, new ArrayList<>());
         service.add(company);
@@ -80,7 +80,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_company_while_delete_company(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Company company = new Company(DUMMY_COMPANY_NAME, 1, new ArrayList<>());
         service.add(company);
 
@@ -91,7 +91,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_all_companies_while_get_all_companies(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Employee firstEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
         Company firstCompany = new Company(DUMMY_COMPANY_NAME, 1, Arrays.asList(firstEmployee));
@@ -104,7 +104,7 @@ public class CompanyServiceTest {
 
     @Test
     public void should_return_all_employees_under_company_while_query_employees_under_a_company(){
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Employee firstEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
         List<Employee> employees = Arrays.asList(firstEmployee, secondEmployee);
@@ -120,7 +120,7 @@ public class CompanyServiceTest {
     public void should_return_companies_while_find_companies_by_page_and_page_size(){
         Integer page = 2;
         Integer pageSize = 1;
-        CompanyService service = new CompanyServiceImpl();
+        CompanyService service = new CompanyServiceImpl(new EmployeeServiceImpl());
         Employee firstEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_TWENTY_TWO, MALE, SALARY);
         Employee secondEmployee = new Employee(0L, DUMMY_EMPLOYEE_NAME, AGE_FIFTY, FEMALE, SALARY_UPDATED);
         Company firstCompany = new Company(DUMMY_COMPANY_NAME, 1, Arrays.asList(firstEmployee));
