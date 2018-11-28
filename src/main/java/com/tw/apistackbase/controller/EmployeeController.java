@@ -24,15 +24,19 @@ public class EmployeeController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public ResponseEntity<List<Employee>> query(@RequestParam(value = "page", required = false) Integer page,
-                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                                @RequestParam(value = "gender", required = false) String gender){
-        if (page != null && pageSize != null){
-            return ResponseEntity.ok(employeeService.findByPageAndPageSize(page, pageSize));
-        } else if (gender != null) {
-            return ResponseEntity.ok(employeeService.findByGender(gender));
-        }
+    public ResponseEntity<List<Employee>> getAll(){
         return ResponseEntity.ok(employeeService.getAll());
+    }
+
+    @GetMapping(produces = {"application/json"}, params = {"gender"})
+    public ResponseEntity<List<Employee>> findByGender(@RequestParam(value = "gender") String gender){
+        return ResponseEntity.ok(employeeService.findByGender(gender));
+    }
+
+    @GetMapping(produces = {"application/json"}, params = {"page", "pageSize"})
+    public ResponseEntity<List<Employee>> findByPageAndPageSize(@RequestParam(value = "page") Integer page,
+                                                @RequestParam(value = "pageSize") Integer pageSize){
+        return ResponseEntity.ok(employeeService.findByPageAndPageSize(page, pageSize));
     }
 
     @PostMapping(produces = {"application/json"})
