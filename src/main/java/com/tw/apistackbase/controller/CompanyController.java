@@ -30,12 +30,14 @@ public class CompanyController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public ResponseEntity<List<Company>> query(@RequestParam(value = "page", required = false) Integer page,
-                                               @RequestParam(value = "pageSize", required = false) Integer pageSize){
-        if (page != null && pageSize != null){
-            return ResponseEntity.ok(companyService.findByPageAndPageSize(page, pageSize));
-        }
+    public ResponseEntity<List<Company>> getAll(){
         return ResponseEntity.ok(companyService.getAll());
+    }
+
+    @GetMapping(produces = {"application/json"}, params = {"page", "pageSize"})
+    public ResponseEntity<List<Company>> findByPageAndPageSize(@RequestParam(value = "page") Integer page,
+                                                                @RequestParam(value = "pageSize") Integer pageSize){
+        return ResponseEntity.ok(companyService.findByPageAndPageSize(page, pageSize));
     }
 
     @PostMapping(produces = {"application/json"})
